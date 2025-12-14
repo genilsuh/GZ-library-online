@@ -51,16 +51,12 @@ modalViewer.addEventListener('click', (event) => {
   }
 });
 
-// Carregar livros do JSON
-fetch("./db/d.json")
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`Erro HTTP: ${response.status}`);
-    }
-    return response.json();
-  })
-  .then(livros => {
-    if (!Array.isArray(livros) || livros.length === 0) {
+// FUNÇÃO PARA CARREGAR LIVROS DO d.js
+function carregarLivrosDoJS() {
+  // Verifica se a variável 'livros' foi carregada do d.js
+  if (typeof livros !== 'undefined' && Array.isArray(livros)) {
+    // Usa os dados diretamente da variável global 'livros'
+    if (livros.length === 0) {
       listaElemento.innerHTML = '<p class="sem-livros">Nenhum livro disponível no momento.</p>';
       return;
     }
@@ -106,16 +102,30 @@ fetch("./db/d.json")
 
       listaElemento.appendChild(livroElemento);
     });
-  })
-  .catch(error => {
-    console.error('Erro ao carregar livros:', error);
+
+    console.log(`✅ Carregados ${livros.length} livros do d.js`);
+  } else {
+    // Fallback caso d.js não tenha carregado
+    console.error('❌ Variável "livros" não encontrada no d.js');
     listaElemento.innerHTML = `
       <div class="erro-carregamento">
         <p>❌ Não foi possível carregar os livros.</p>
-        <p>Detalhes: ${error.message}</p>
+        <p>Erro: Dados não disponíveis</p>
+        <p><small>Verifique se o arquivo d.js existe e contém a variável "livros"</small></p>
       </div>
     `;
-  });
+  }
+}
+
+// Chama a função para carregar os livros quando a página estiver pronta
+if (document.readyState === 'loading') {
+  // Se a página ainda está carregando, espera o evento
+  document.addEventListener('DOMContentLoaded', carregarLivrosDoJS);
+} else {
+  // Se a página já carregou, executa imediatamente
+  carregarLivrosDoJS();
+}
+
 
 // Busca de livros (funcionalidade adicional)
 const barraPesquisa = document.getElementById('pesquisa-header');
