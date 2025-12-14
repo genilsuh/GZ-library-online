@@ -52,7 +52,7 @@ modalViewer.addEventListener('click', (event) => {
 });
 
 // Carregar livros do JSON
-fetch("d.json")
+fetch("/db/d.json")
   .then(response => {
     if (!response.ok) {
       throw new Error(`Erro HTTP: ${response.status}`);
