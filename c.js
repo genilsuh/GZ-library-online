@@ -117,13 +117,23 @@ function carregarLivrosDoJS() {
   }
 }
 
-// Chama a função para carregar os livros quando a página estiver pronta
+// Modificar a função de carregamento para não renderizar automaticamente
+function inicializarSistema() {
+  // Aguardar o carregamento do filtroGenero
+  if (typeof filtroGenero === 'undefined') {
+    setTimeout(inicializarSistema, 100);
+    return;
+  }
+
+  // O sistema de filtros agora cuida da renderização
+  console.log('✅ Sistema de biblioteca inicializado');
+}
+
+// Inicializar quando o DOM estiver pronto
 if (document.readyState === 'loading') {
-  // Se a página ainda está carregando, espera o evento
-  document.addEventListener('DOMContentLoaded', carregarLivrosDoJS);
+  document.addEventListener('DOMContentLoaded', inicializarSistema);
 } else {
-  // Se a página já carregou, executa imediatamente
-  carregarLivrosDoJS();
+  inicializarSistema();
 }
 
 

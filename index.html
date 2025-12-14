@@ -27,45 +27,66 @@
   <section class="destaques">
     <h2>Gêneros Populares</h2>
     <div class="generos">
-      <div class="genero-item">
+      <div class="genero-item" data-genero="aventura">
         <a href="#aventura" aria-label="Livros de Aventura">
           <img src="body/img/generos/aventuramg.jpeg" alt="Ícone de Aventura">
         </a>
         <h4>Aventura</h4>
       </div>
 
-      <div class="genero-item">
+      <div class="genero-item" data-genero="fantasia">
         <a href="#fantasia" aria-label="Livros de Fantasia">
           <img src="body/img/generos/fantasiamg.jpeg" alt="Ícone de Fantasia">
         </a>
         <h4>Fantasia</h4>
       </div>
 
-      <div class="genero-item">
+      <div class="genero-item" data-genero="filosofia">
         <a href="#filosofia" aria-label="Livros de Filosofia">
           <img src="body/img/generos/filosofiamg.jpeg" alt="Ícone de Filosofia">
         </a>
         <h4>Filosofia</h4>
       </div>
 
-      <div class="genero-item">
+      <div class="genero-item" data-genero="poesia">
         <a href="#poesia" aria-label="Livros de Poesia">
           <img src="body/img/generos/poesiamg.jpeg" alt="Ícone de Poesia">
         </a>
         <h4>Poesia</h4>
       </div>
 
-      <div class="genero-item">
+      <div class="genero-item" data-genero="terror">
         <a href="#terror" aria-label="Livros de Terror">
           <img src="body/img/generos/terrormg.jpeg" alt="Ícone de Terror">
         </a>
         <h4>Terror</h4>
       </div>
+
+      <div class="genero-item" data-genero="Romance">
+        <a href="#romance" aria-label="Livros de Romance">
+          <img src="body/img/generos/romancemg.png" alt="Ícone de Romance">
+        </a>
+        <h4>Romance</h4>
+      </div>
+
+      <div class="genero-item" data-genero="suspense">
+        <a href="#fantasia" aria-label="Livros de Suspense">
+          <img src="body/img/generos/suspensemg.png" alt="Ícone de Suspense">
+        </a>
+        <h4>Suspense</h4>
+      </div>
     </div>
+
+    <button id="limparFiltros" class="btn-limpar" style="display: none;">
+      Limpar Filtros (Mostrar Todos)
+    </button>
   </section>
 
   <main>
     <h1>~ Biblioteca Digital ~</h1>
+    <div id="contadorLivros" class="contador-livros">
+      Mostrando <span id="quantidadeFiltrada">0</span> de <span id="quantidadeTotal">0</span> Livros
+    </div>
     <div id="bookList" class="book-list"></div>
   </main>
 
@@ -87,15 +108,11 @@
       </div>
       <p>criado e desenvolvido por - 2025</p>
     </footer>
-
-
   </div>
-
-
-
 
   <script src="c.js"></script>
   <script src="d.js"></script>
+  <script src="filtro.js"></script>
 </body>
 
 </html>

@@ -5,7 +5,8 @@ const livros = [
     autor: "Machado de Assis",
     link: "1n6df_QjmEU5WFdVD0AvyfnkE7uBrAKYj",
     capa: "15Il2UXnHCPpv0VicKNFqjkRoyMOa9svl",
-    descricao: "Romance brasileiro sobre memória, ciúme e ambiguidade, narrado por Bentinho."
+    descricao: "Romance brasileiro sobre memória, ciúme e ambiguidade, narrado por Bentinho.",
+    genero: "filosofia"
   },
   {
     id: 2,
@@ -13,7 +14,8 @@ const livros = [
     autor: "Fiódor Dostoiévski",
     link: "11Z-lC5HwtakmqjRMeaSqnWhrqSEp_uEa",
     capa: "1O0AHLD58ifCGynJCj9BwyyMoDy-rrlXQ",
-    descricao: "História romântica sobre o Sonhador e Nástienka durante as noites brancas de São Petersburgo."
+    descricao: "História romântica sobre o Sonhador e Nástienka durante as noites brancas de São Petersburgo.",
+    genero: "aventura"
   },
   {
     id: 3,
@@ -21,7 +23,8 @@ const livros = [
     autor: "John Green",
     link: "12ykrV-bM963s1HHSHZtKGvAy5jN9Cq_L",
     capa: "18YVXtzw4EnQpq72pd_H2mT3BBWwURcPB",
-    descricao: "Romance juvenil sobre amor, doença e finitude."
+    descricao: "Romance juvenil sobre amor, doença e finitude.",
+    genero: "fantasia"
   },
   {
     id: 4,
@@ -29,7 +32,8 @@ const livros = [
     autor: "Franz Kafka",
     link: "1EHtGHZ-ncc5eerK8hIgctz_1bv-y_Sos",
     capa: "1N5pCXpcOgbGv6oS7ZX-J82jR3HSb6UCb",
-    descricao: "Novela sobre alienação e identidade, com a transformação de Gregor Samsa."
+    descricao: "Novela sobre alienação e identidade, com a transformação de Gregor Samsa.",
+    genero: "terror"
   },
   {
     id: 5,
@@ -37,7 +41,8 @@ const livros = [
     autor: "Stephen Chbosky",
     link: "1MnvRLNC4apiZuqnnvEjdFY8zxfUnXHyG",
     capa: "1NwpqyrPcYQ354j1JH6ne9aPnjBkbWZ3l",
-    descricao: "Narrativa de amadurecimento sobre amizade, trauma e pertencimento."
+    descricao: "Narrativa de amadurecimento sobre amizade, trauma e pertencimento.",
+    genero: "poesia"
   },
   {
     id: 6,
@@ -45,6 +50,7 @@ const livros = [
     autor: "Agatha Christie",
     link: "1P1_EctZW-aFYNif-nbhzmMcwIGqTzcFK",
     capa: "1VBgJGFLEUKKBVZOjA3BjwUNhowecsDZn",
-    descricao: "Mistério clássico envolvendo um convite mortal e investigação."
+    descricao: "Mistério clássico envolvendo um convite mortal e investigação.",
+    genero: "suspense"
   }
 ];
