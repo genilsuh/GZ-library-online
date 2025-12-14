@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GZ Library</title>
+  <link rel="stylesheet" href="/body/style/pg_inicio.css">
+</head>
+
+<body>
+  <header>
+    <nav class="nav-bar">
+      <div class="logo">
+        GZ <span>Library</span>
+      </div>
+      <div class="bar-pesquisa">
+        <input type="text" placeholder="Buscar livro..." id="pesquisa-header">
+        <button type="button">🔍</button>
+      </div>
+      <div class="bt-acess">
+        <a href="GZ-library-online.html" class="btn-acesso">Acesse</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="destaques">
+    <h2>Gêneros Populares</h2>
+    <div class="generos">
+      <div class="genero-item">
+        <a href="#aventura" aria-label="Livros de Aventura">
+          <img src="/body/img/generos/aventuramg.jpeg" alt="Ícone de Aventura">
+        </a>
+        <h4>Aventura</h4>
+      </div>
+
+      <div class="genero-item">
+        <a href="#fantasia" aria-label="Livros de Fantasia">
+          <img src="/body/img/generos/fantasiamg.jpeg" alt="Ícone de Fantasia">
+        </a>
+        <h4>Fantasia</h4>
+      </div>
+
+      <div class="genero-item">
+        <a href="#filosofia" aria-label="Livros de Filosofia">
+          <img src="/body/img/generos/filosofiamg.jpeg" alt="Ícone de Filosofia">
+        </a>
+        <h4>Filosofia</h4>
+      </div>
+
+      <div class="genero-item">
+        <a href="#poesia" aria-label="Livros de Poesia">
+          <img src="/body/img/generos/poesiamg.jpeg" alt="Ícone de Poesia">
+        </a>
+        <h4>Poesia</h4>
+      </div>
+
+      <div class="genero-item">
+        <a href="#terror" aria-label="Livros de Terror">
+          <img src="/body/img/generos/terrormg.jpeg" alt="Ícone de Terror">
+        </a>
+        <h4>Terror</h4>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <h1>~ Biblioteca Digital ~</h1>
+    <div id="bookList" class="book-list"></div>
+  </main>
+
+  <div id="viewer" class="viewer-modal" style="display: none;">
+    <div class="modal-content">
+      <button id="closeBtn" class="close-btn">✕ FECHAR</button>
+      <iframe id="bookFrame" src="" title="Visualizador de Livro"></iframe>
+    </div>
+  </div>
+
+  <div class="rodape">
+    <footer>
+      <div class="contt">
+        <h3>contato</h3>
+        <ul>
+          <li>E mail: <a class="link-ctt" href=""></a></li>
+          <li>Ig: <a class="link-ctt" href="">@genilsuh</a></li>
+        </ul>
+      </div>
+      <p>criado e desenvolvido por - 2025</p>
+    </footer>
+
+
+  </div>
+
+
+
+
+  <script src="c.js"></script>
+</body>
+
+</html>
