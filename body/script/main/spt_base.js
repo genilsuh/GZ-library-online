@@ -44,7 +44,6 @@ const listaElemento = document.getElementById('bookList');
 const modalViewer = document.getElementById('viewer');
 const bookFrame = document.getElementById('bookFrame');
 const closeBtn = document.getElementById('closeBtn');
-const cadastroMD = document.getElementById()
 
 // funcao da capa do livro q n queria dar crt essa desgraçaaaaa😪😭😭😭😭😭!!!!!!!!!
 function criarLinkImagem(id) {
