@@ -9,21 +9,65 @@
 </head>
 
 <body>
+
+
+  <!-- HEADER // PARTE DE RIBA -->
   <header>
     <nav class="nav-bar">
+
       <div class="logo">
         GZ <span>Library</span>
       </div>
+
       <div class="bar-pesquisa">
         <input type="text" placeholder="Buscar livro..." id="pesquisa-header">
         <button type="button">🔍</button>
       </div>
+
       <div class="bt-acess">
-        <a href="GZ-library-online.html" class="btn-acesso">Acesse</a>
+        <button id="abriModal" class="btn-abri-modal">Cadastre-se</button>
       </div>
+
     </nav>
   </header>
 
+  <!-- MODAL DE CADASTRO // "UM PASSO PARA DESISTIR 😭😭😭" -->
+  <div id="modalCadastro" class="modal-cadastro">
+    <div class="modal-conteudo">
+      <!-- CABEÇALHO -->
+      <div class="header-do-modal-cadastro">
+        <h2>cadastro</h2>
+        <button class="fecha-cadastro">&times;</button>
+      </div>
+
+      <!-- corpo -->
+      <div class="modal-corpo">
+        <form id="CartCadastro">
+          <div class="item-form">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+          </div>
+
+          <div class="item-form">
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="item-form">
+            <label for="nome">Senha:</label>
+            <input type="password" id="senha" name="senha" required>
+          </div>
+          <button type="submit" class="btn-enviar">Cadastrar</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+  <!-- DESTAQUES // FILTRO DE GENERO -->
   <section class="destaques">
     <h2>Gêneros Populares</h2>
     <div class="generos">
@@ -82,6 +126,8 @@
     </button>
   </section>
 
+
+  <!-- CORPO PRINCIPAL // ONDE FICA OS COISO QUASE TD -->
   <main>
     <h1>~ Biblioteca Digital ~</h1>
     <div id="contadorLivros" class="contador-livros">
@@ -97,6 +143,8 @@
     </div>
   </div>
 
+
+  <!-- RODAPE -->
   <div class="rodape">
     <footer>
       <div class="contt">
@@ -110,9 +158,11 @@
     </footer>
   </div>
 
-  <script src="c.js"></script>
-  <script src="d.js"></script>
-  <script src="filtro.js"></script>
+
+
+  <script src="body/script/main/spt_base.js"></script>
+  <script src="body/script/db/data_book.js"></script>
+  <script src="body/script/main/filtro.js"></script>
 </body>
 
 </html>

@@ -15,12 +15,18 @@
   box-sizing: border-box;
 }
 
+
+
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
   color: var(--4);
   background-color: var(--5);
 }
+
+
+
 
 /* Header */
 .nav-bar {
@@ -32,6 +38,9 @@ body {
   color: white;
 }
 
+
+
+
 .logo {
   font-size: 1.8rem;
   font-weight: bold;
@@ -40,6 +49,9 @@ body {
 .logo span {
   color: #3498db;
 }
+
+
+
 
 .bar-pesquisa {
   display: flex;
@@ -64,14 +76,119 @@ body {
   cursor: pointer;
 }
 
-.btn-acesso {
-  padding: 0.5rem 1.5rem;
+.btn-abri-modal {
+  padding: 10px 20px;
   background-color: #e74c3c;
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
-  font-weight: bold;
+  color: var(--3);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.5s;
 }
+
+.btn-abri-modal:hover {
+  transform: scale(1.15);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-conteudo {
+  background-color: var(--4);
+  margin: 5% auto;
+  padding: 0;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px var(--5);
+}
+
+.header-do-modal-cadastro {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #2c3e50;
+  border-bottom: 1px solid #ddd;
+  border-radius: 8px 8px 0 0;
+}
+
+.header-do-modal-cadastro h2 {
+  margin: 0;
+  color: var(--4);
+}
+
+.fecha-cadastro {
+  background: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: #666;
+}
+
+.fecha-cadastro:hover {
+  color: #333;
+}
+
+
+.modal-corpo {
+  padding: 20px;
+}
+
+.item-form {
+  margin-bottom: 10px;
+}
+
+.item-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.item-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.item-form input:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.btn-enviar {
+  width: 100%;
+  padding: 15px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.btn-enviar:hover {
+  background-color: #45a049;
+}
+
+
+
+
+
 
 /* Seção de destaques */
 .destaques {
@@ -159,6 +276,10 @@ body {
   background-color: #5a6268;
 }
 
+
+
+
+
 /* Contador de livros */
 .contador-livros {
   text-align: center;
@@ -167,6 +288,10 @@ body {
   color: #666;
   font-style: italic;
 }
+
+
+
+
 
 /* Badge de gênero nos cards */
 .capa-container {

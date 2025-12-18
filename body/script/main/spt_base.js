@@ -1,14 +1,54 @@
-// --- CARREGAR LISTA DE LIVROS ---
 
+
+
+
+//  MODAL DO CADASTRO
+const btnAbrir = document.getElementById('abriModal');
+const modal = document.getElementById('modalCadastro');
+const btnFechar = document.querySelector('.fecha-cadastro');
+const form = document.getElementById('CartCadastro');
+
+// COISOS QUE FAZEM ABRIE E FECHAR
+btnAbrir.addEventListener('click', () => {
+  modal.style.display = 'block';
+});
+
+btnFechar.addEventListener('click', () => {
+  modal.style.display = 'none';
+});
+
+window.addEventListener('click', (event) => {
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// --- CARREGAR LISTA DE LIVROS ---
 const listaElemento = document.getElementById('bookList');
 const modalViewer = document.getElementById('viewer');
 const bookFrame = document.getElementById('bookFrame');
 const closeBtn = document.getElementById('closeBtn');
+const cadastroMD = document.getElementById()
 
 // funcao da capa do livro q n queria dar crt essa desgraçaaaaa😪😭😭😭😭😭!!!!!!!!!
 function criarLinkImagem(id) {
   if (!id) return 'body/img/capa-padrao.jpg';
-
   const formatos = [
     // tp1 - coiso Thumbnail
     `https://drive.google.com/thumbnail?id=${id}&sz=w400`,
@@ -17,18 +57,18 @@ function criarLinkImagem(id) {
     // tp3 - coiso de dowlod 
     `https://drive.google.com/uc?export=download&id=${id}`,
   ];
-
   return formatos[0];
 }
+
 
 // Funções para criar URLs
 function criarLinkVisualizacao(id) {
   return `https://drive.google.com/file/d/${id}/preview`;
 }
-
 function criarLinkDownload(id) {
   return `https://drive.google.com/uc?export=download&id=${id}`;
 }
+
 
 // Abrir visualização do livro
 function abrirVisualizacao(event, livroId) {
