@@ -75,8 +75,8 @@ const livros = [
       id: 9,
       titulo: "Biblioteca da Meia Noite",
       autor: "Matt Haig",
-      link: "14jhogAXka0sKP1WEfMfEzrrs8Xfkno7W",
-      capa: "1P5asqX0OzUaQfHZVjaQp_X5fzRAQTM0K",
+      capa: "14jhogAXka0sKP1WEfMfEzrrs8Xfkno7W",
+      link: "1P5asqX0OzUaQfHZVjaQp_X5fzRAQTM0K",
       descricao: "História sobre uma mulher que, entre a vida e a morte, tem a oportunidade de visitar infinitas vidas alternativas que poderia ter vivido.",
       genero: "fantasia"
    },
@@ -93,8 +93,8 @@ const livros = [
       id: 11,
       titulo: "O Código da Vinci",
       autor: "Dan Brown",
-      link: "1vpu0FZJw8_0cVWCwuliH0gWUqu3Flpa2",
-      capa: "1oteralg8RAyzd57yZSayQHbUsq6YGAEh",
+      capa: "1vpu0FZJw8_0cVWCwuliH0gWUqu3Flpa2",
+      link: "1oteralg8RAyzd57yZSayQHbUsq6YGAEh",
       descricao: "Thriller de mistério que envolve símbolos ocultos, sociedades secretas e uma busca por segredos históricos relacionados a Leonardo da Vinci.",
       genero: "suspense"
    },

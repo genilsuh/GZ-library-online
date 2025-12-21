@@ -156,6 +156,8 @@ function carregarLivrosDoJS() {
   }
 }
 
+
+
 // Modificar a função de carregamento para não renderizar automaticamente
 function inicializarSistema() {
   // Aguardar o carregamento do filtroGenero
@@ -176,7 +178,7 @@ if (document.readyState === 'loading') {
 }
 
 
-// Busca de livros (funcionalidade adicional)
+// Busca de livros
 const barraPesquisa = document.getElementById('pesquisa-header');
 if (barraPesquisa) {
   barraPesquisa.addEventListener('input', function () {
@@ -195,3 +197,119 @@ if (barraPesquisa) {
     });
   });
 }
+
+
+// Elementos do DOM
+const carousel = document.querySelector('.carrossel');
+const slides = document.querySelectorAll('.slide-banner');
+const prevBtn = document.querySelector('.ant-btn');
+const nextBtn = document.querySelector('.prox-btn');
+const indicators = document.querySelectorAll('.indicador');
+
+// Configurações
+let currentSlide = 0;
+const totalSlides = slides.length;
+let slideInterval;
+const intervalTime = 5000; // 5 segundos
+
+// Função para inicializar o carrossel
+function initCarousel() {
+  // Posiciona o carrossel no slide atual
+  updateCarousel();
+
+  // Inicia a transição automática
+  startAutoSlide();
+
+  // Adiciona eventos aos botões
+  prevBtn.addEventListener('click', () => {
+    prevSlide();
+    resetAutoSlide();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    nextSlide();
+    resetAutoSlide();
+  });
+
+  // Adiciona eventos aos indicadores
+  indicators.forEach(indicator => {
+    indicator.addEventListener('click', () => {
+      const slideIndex = parseInt(indicator.getAttribute('data-slide'));
+      goToSlide(slideIndex);
+      resetAutoSlide();
+    });
+  });
+
+  // Adiciona suporte a teclado
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      prevSlide();
+      resetAutoSlide();
+    } else if (e.key === 'ArrowRight') {
+      nextSlide();
+      resetAutoSlide();
+    } else if (e.key === ' ') {
+      // Espaço pausa/continua
+      if (!isPaused) {
+        stopAutoSlide();
+        pauseControl.textContent = "Continuar";
+        isPaused = true;
+      } else {
+        startAutoSlide();
+        pauseControl.textContent = "Pausar";
+        isPaused = false;
+      }
+    }
+  });
+}
+
+// Função para atualizar a posição do carrossel
+function updateCarousel() {
+  carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+  // Atualiza indicadores
+  indicators.forEach((indicator, index) => {
+    if (index === currentSlide) {
+      indicator.classList.add('active');
+    } else {
+      indicator.classList.remove('active');
+    }
+  });
+}
+
+// Função para ir para o próximo slide
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % totalSlides;
+  updateCarousel();
+}
+
+// Função para ir para o slide anterior
+function prevSlide() {
+  currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+  updateCarousel();
+}
+
+// Função para ir para um slide específico
+function goToSlide(slideIndex) {
+  currentSlide = slideIndex;
+  updateCarousel();
+}
+
+// Função para iniciar a transição automática
+function startAutoSlide() {
+  slideInterval = setInterval(nextSlide, intervalTime);
+}
+
+// Função para parar a transição automática
+function stopAutoSlide() {
+  clearInterval(slideInterval);
+}
+
+// Função para reiniciar a transição automática
+function resetAutoSlide() {
+  stopAutoSlide();
+  startAutoSlide();
+}
+
+// Inicializa o carrossel quando a página carrega
+document.addEventListener('DOMContentLoaded', initCarousel);
