@@ -15,7 +15,7 @@ class FiltroGenero {
    inicializar() {
       // Verificar se os livros foram carregados
       if (typeof livros === 'undefined' || !Array.isArray(livros)) {
-         console.error('Livros não encontrados. Aguardando carregamento...');
+         console.log('Livros não encontrados. Aguardando carregamento...');
          setTimeout(() => this.inicializar(), 100);
          return;
       }
@@ -23,7 +23,14 @@ class FiltroGenero {
       this.livros = livros;
       this.criarEventListeners();
       this.atualizarContador();
-      this.renderizarLivros(this.livros);
+
+      // Configurar paginação
+      if (window.sistemaPaginacao) {
+         window.sistemaPaginacao.configurar(this.livros);
+      } else {
+         // Fallback: renderizar diretamente
+         this.renderizarLivros(this.livros);
+      }
    }
 
    criarEventListeners() {
@@ -54,7 +61,13 @@ class FiltroGenero {
          livro.genero && livro.genero.toLowerCase() === this.generoAtivo
       );
 
-      this.renderizarLivros(livrosFiltrados);
+      // Chamar sistema de paginação
+      if (window.sistemaPaginacao) {
+         window.sistemaPaginacao.filtrarLivros(livrosFiltrados);
+      } else {
+         this.renderizarLivros(livrosFiltrados);
+      }
+
       this.atualizarContador(livrosFiltrados.length);
       this.atualizarDestaqueGenero();
       this.mostrarBotaoLimpar();
@@ -68,7 +81,14 @@ class FiltroGenero {
 
    limparFiltros() {
       this.generoAtivo = null;
-      this.renderizarLivros(this.livros);
+
+      // Chamar sistema de paginação
+      if (window.sistemaPaginacao) {
+         window.sistemaPaginacao.limparFiltros();
+      } else {
+         this.renderizarLivros(this.livros);
+      }
+
       this.atualizarContador();
       this.atualizarDestaqueGenero();
       this.esconderBotaoLimpar();
@@ -102,7 +122,7 @@ class FiltroGenero {
       const livroElemento = document.createElement('div');
       livroElemento.className = 'livro-card';
 
-      // Usar a função de c.js para criar link da imagem
+      // Usar a função do spt_base.js para criar link da imagem
       const imagemCapa = window.criarLinkImagem ? window.criarLinkImagem(livro.capa) :
          (livro.capa ? `https://drive.google.com/thumbnail?id=${livro.capa}&sz=w400` : 'body/img/capa-padrao.jpg');
 
@@ -127,7 +147,7 @@ class FiltroGenero {
           <a href="${window.criarLinkDownload ? window.criarLinkDownload(livro.link) : `https://drive.google.com/uc?export=download&id=${livro.link}`}" 
              class="btn-download" 
              target="_blank"
-             download>
+             download="${livro.titulo.replace(/[^a-z0-9]/gi, '_')}.pdf">
             ⬇️ Download
           </a>
           <a href="https://drive.google.com/file/d/${livro.link}/view" 
@@ -188,6 +208,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Exportar para uso global
-if (typeof window !== 'undefined') {
-   window.filtroGenero = filtroGenero;
-}
+window.filtroGenero = filtroGenero;

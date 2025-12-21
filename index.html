@@ -6,22 +6,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GZ Library</title>
   <link rel="stylesheet" href="body/style/pg_inicio.css">
+  <!-- Adicionando Font Awesome para os ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
 
-
-  <!-- HEADER // PARTE DE RIBA -->
+  <!-- HEADER // PARTE DE CIMA -->
   <header>
     <nav class="nav-bar">
 
       <div class="logo">
-        GZ <span>Library</span>
+        <img id="logo" class="logo" src="body/img/icons/GZ (1).png" alt="logo-jpeg">
+
+        <audio id="musica" controls loop style="display: none;">
+          <source src="body/audio/FSO 2016 Oficial _ Harry Potter and the Philosopher_s Stone(MP3_160K) (2).mp3"
+            type="audio/mpeg">
+        </audio>
       </div>
 
       <div class="bar-pesquisa">
         <input type="text" placeholder="Buscar livro..." id="pesquisa-header">
-        <button type="button">🔍</button>
+        <button type="button" id="btn-pesquisa">🔍</button>
       </div>
 
       <div class="bt-acess">
@@ -31,13 +37,13 @@
     </nav>
   </header>
 
-  <!-- MODAL DE CADASTRO // "UM PASSO PARA DESISTIR 😭😭😭" -->
+  <!-- MODAL DE CADASTRO -->
   <div id="modalCadastro" class="modal-cadastro" style="display: none;">
     <div class="modal-conteudo">
 
       <!-- CABEÇALHO -->
       <div class="header-do-modal-cadastro">
-        <h2>cadastro</h2>
+        <h2>Cadastro</h2>
         <button class="fecha-cadastro">&times;</button>
       </div>
 
@@ -55,7 +61,7 @@
           </div>
 
           <div class="item-form">
-            <label for="nome">Senha:</label>
+            <label for="senha">Senha:</label>
             <input type="password" id="senha" name="senha" required>
           </div>
           <button type="submit" class="btn-enviar">Cadastrar</button>
@@ -65,18 +71,14 @@
     </div>
   </div>
 
-
-
-
+  <!-- CARROSSEL -->
   <div class="container-banner">
     <div class="carrossel">
-
       <div class="slide-banner">
-        <img src="body/img/slide-banner/GZ.png" alt="">
+        <img src="body/img/slide-banner/GZ.png" alt="Banner 1">
       </div>
-
       <div class="slide-banner">
-        <img src="body/img/slide-banner/GZ2.png" alt="">
+        <img src="body/img/slide-banner/GZ2.png" alt="Banner 2">
       </div>
     </div>
 
@@ -84,59 +86,15 @@
     <button class="slide-btn ant-btn">
       <i class="fas fa-chevron-left"></i>
     </button>
-
     <button class="slide-btn prox-btn">
       <i class="fas fa-chevron-right"></i>
     </button>
 
     <div class="carousel-indicators">
-      <div class="indicador ative" data-slide="0"></div>
+      <div class="indicador ativo" data-slide="0"></div>
       <div class="indicador" data-slide="1"></div>
-      <div class="indicador" data-slide="2"></div>
-      <div class="indicador" data-slide="3"></div>
-      <div class="indicador" data-slide="4"></div>
     </div>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   <!-- DESTAQUES // FILTRO DE GENERO -->
   <section class="destaques">
@@ -177,7 +135,7 @@
         <h4>Terror</h4>
       </div>
 
-      <div class="genero-item" data-genero="Romance">
+      <div class="genero-item" data-genero="romance">
         <a href="#romance" aria-label="Livros de Romance">
           <img src="body/img/generos/romancemg.png" alt="Ícone de Romance">
         </a>
@@ -185,7 +143,7 @@
       </div>
 
       <div class="genero-item" data-genero="suspense">
-        <a href="#fantasia" aria-label="Livros de Suspense">
+        <a href="#suspense" aria-label="Livros de Suspense">
           <img src="body/img/generos/suspensemg.png" alt="Ícone de Suspense">
         </a>
         <h4>Suspense</h4>
@@ -197,16 +155,23 @@
     </button>
   </section>
 
-
-  <!-- CORPO PRINCIPAL // ONDE FICA OS COISO QUASE TD -->
+  <!-- CORPO PRINCIPAL -->
   <main>
     <h1>~ Biblioteca Digital ~</h1>
     <div id="contadorLivros" class="contador-livros">
       Mostrando <span id="quantidadeFiltrada">0</span> de <span id="quantidadeTotal">0</span> Livros
     </div>
     <div id="bookList" class="book-list"></div>
+
+    <!-- PAGINAÇÃO -->
+    <div id="paginacaoContainer" class="paginacao-container" style="display: none;">
+      <button id="paginaAnterior" class="btn-pagina" disabled>← Anterior</button>
+      <div id="numerosPagina" class="numeros-pagina"></div>
+      <button id="proximaPagina" class="btn-pagina">Próxima →</button>
+    </div>
   </main>
 
+  <!-- MODAL VISUALIZADOR -->
   <div id="viewer" class="viewer-modal" style="display: none;">
     <div class="modal-content">
       <button id="closeBtn" class="close-btn">✕ FECHAR</button>
@@ -214,26 +179,25 @@
     </div>
   </div>
 
-
-  <!-- RODAPE -->
+  <!-- RODAPÉ -->
   <div class="rodape">
     <footer>
       <div class="contt">
-        <h3>contato</h3>
+        <h3>Contato</h3>
         <ul>
-          <li>E mail: <a class="link-ctt" href=""></a></li>
-          <li>Ig: <a class="link-ctt" href="">@genilsuh</a></li>
+          <li>E-mail: <a class="link-ctt" href="mailto:contato@gzlibrary.com">contato@gzlibrary.com</a></li>
+          <li>Instagram: <a class="link-ctt" href="https://instagram.com/genilsuh" target="_blank">@genilsuh</a></li>
         </ul>
       </div>
-      <p>criado e desenvolvido por - 2025</p>
+      <p>© GZ Library - 2025</p>
     </footer>
   </div>
 
-
-
-  <script src="body/script/main/spt_base.js"></script>
   <script src="body/script/db/data_book.js"></script>
+  <script src="body/script/main/spt_base.js"></script>
   <script src="body/script/main/filtro.js"></script>
+  <script src="body/script/main/paginacao.js"></script>
+
 </body>
 
 </html>
