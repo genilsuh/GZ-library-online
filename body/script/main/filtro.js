@@ -1,13 +1,12 @@
-// Sistema de Filtros por Gênero
-
+// SISTEMA DE FILTROS POR GÊNERO
 class FiltroGenero {
    constructor() {
-      this.livros = [];
+      this.listaLivros = [];
       this.generoAtivo = null;
-      this.listaElemento = document.getElementById('bookList');
-      this.contadorFiltrado = document.getElementById('quantidadeFiltrada');
-      this.contadorTotal = document.getElementById('quantidadeTotal');
-      this.btnLimpar = document.getElementById('limparFiltros');
+      this.elementoLista = document.getElementById('lista-livros');
+      this.contadorFiltrado = document.getElementById('quantidade-filtrada');
+      this.contadorTotal = document.getElementById('quantidade-total');
+      this.botaoLimparFiltros = document.getElementById('limpar-filtros');
 
       this.inicializar();
    }
@@ -15,53 +14,51 @@ class FiltroGenero {
    inicializar() {
       // Verificar se os livros foram carregados
       if (typeof livros === 'undefined' || !Array.isArray(livros)) {
-         console.log('Livros não encontrados. Aguardando carregamento...');
+         console.log('Aguardando carregamento dos livros...');
          setTimeout(() => this.inicializar(), 100);
          return;
       }
 
-      this.livros = livros;
-      this.criarEventListeners();
+      this.listaLivros = livros;
+      this.configurarEventListeners();
       this.atualizarContador();
 
-      // Configurar paginação
+      // Configurar com sistema de paginação se disponível
       if (window.sistemaPaginacao) {
-         window.sistemaPaginacao.configurar(this.livros);
+         window.sistemaPaginacao.configurar(this.listaLivros);
       } else {
-         // Fallback: renderizar diretamente
-         this.renderizarLivros(this.livros);
+         this.renderizarLivros(this.listaLivros);
       }
    }
 
-   criarEventListeners() {
-      // Adicionar eventos aos itens de gênero
-      const itensGenero = document.querySelectorAll('.genero-item');
+   configurarEventListeners() {
+      // Eventos para os itens de gênero
+      const itensGenero = document.querySelectorAll('.item-genero');
 
       itensGenero.forEach(item => {
-         item.addEventListener('click', (e) => {
-            e.preventDefault();
+         item.addEventListener('click', (evento) => {
+            evento.preventDefault();
             const genero = item.getAttribute('data-genero');
-            this.filtrarPorGenero(genero);
+            this.aplicarFiltroGenero(genero);
          });
       });
 
       // Evento para o botão limpar filtros
-      if (this.btnLimpar) {
-         this.btnLimpar.addEventListener('click', () => this.limparFiltros());
+      if (this.botaoLimparFiltros) {
+         this.botaoLimparFiltros.addEventListener('click', () => this.removerFiltros());
       }
 
-      // Destacar item ativo
       this.atualizarDestaqueGenero();
    }
 
-   filtrarPorGenero(genero) {
+   aplicarFiltroGenero(genero) {
       this.generoAtivo = genero.toLowerCase();
 
-      const livrosFiltrados = this.livros.filter(livro =>
+      const livrosFiltrados = this.listaLivros.filter(livro =>
          livro.genero && livro.genero.toLowerCase() === this.generoAtivo
       );
 
-      // Chamar sistema de paginação
+      // Usar sistema de paginação se disponível
       if (window.sistemaPaginacao) {
          window.sistemaPaginacao.filtrarLivros(livrosFiltrados);
       } else {
@@ -79,14 +76,14 @@ class FiltroGenero {
       });
    }
 
-   limparFiltros() {
+   removerFiltros() {
       this.generoAtivo = null;
 
-      // Chamar sistema de paginação
+      // Usar sistema de paginação se disponível
       if (window.sistemaPaginacao) {
          window.sistemaPaginacao.limparFiltros();
       } else {
-         this.renderizarLivros(this.livros);
+         this.renderizarLivros(this.listaLivros);
       }
 
       this.atualizarContador();
@@ -96,62 +93,63 @@ class FiltroGenero {
 
    renderizarLivros(livrosParaRenderizar) {
       // Limpar lista atual
-      this.listaElemento.innerHTML = '';
+      this.elementoLista.innerHTML = '';
 
       if (livrosParaRenderizar.length === 0) {
          const mensagem = document.createElement('div');
-         mensagem.className = 'sem-resultados';
+         mensagem.className = 'mensagem-sem-resultados';
          mensagem.innerHTML = `
         <p>📚 Nenhum livro encontrado para o gênero selecionado.</p>
-        <button onclick="window.filtroGenero.limparFiltros()" class="btn-voltar">
+        <button onclick="window.filtroGenero.removerFiltros()" class="botao-voltar">
           Voltar para todos os livros
         </button>
       `;
-         this.listaElemento.appendChild(mensagem);
+         this.elementoLista.appendChild(mensagem);
          return;
       }
 
       // Renderizar cada livro
       livrosParaRenderizar.forEach(livro => {
-         const livroElemento = this.criarElementoLivro(livro);
-         this.listaElemento.appendChild(livroElemento);
+         const elementoLivro = this.criarElementoLivro(livro);
+         this.elementoLista.appendChild(elementoLivro);
       });
    }
 
    criarElementoLivro(livro) {
-      const livroElemento = document.createElement('div');
-      livroElemento.className = 'livro-card';
+      const elementoLivro = document.createElement('div');
+      elementoLivro.className = 'card-livro';
 
-      // Usar a função do spt_base.js para criar link da imagem
-      const imagemCapa = window.criarLinkImagem ? window.criarLinkImagem(livro.capa) :
+      // Gerar link da imagem
+      const imagemCapa = window.gerarLinkImagem ?
+         window.gerarLinkImagem(livro.capa) :
          (livro.capa ? `https://drive.google.com/thumbnail?id=${livro.capa}&sz=w400` : 'body/img/capa-padrao.jpg');
 
-      livroElemento.innerHTML = `
-      <div class="capa-container">
+      elementoLivro.innerHTML = `
+      <div class="container-capa">
         <img src="${imagemCapa}" 
              alt="Capa do livro: ${livro.titulo}" 
-             class="capa"
+             class="imagem-capa"
              onerror="this.src='body/img/capa-padrao.jpg'">
         ${livro.genero ? `<span class="badge-genero">${livro.genero}</span>` : ''}
       </div>
       <div class="info-livro">
-        <h3 class="titulo">${livro.titulo}</h3>
-        <div class="autor">${livro.autor}</div>
-        <p class="descricao">${livro.descricao}</p>
+        <h3 class="titulo-livro">${livro.titulo}</h3>
+        <div class="autor-livro">${livro.autor}</div>
+        <p class="descricao-livro">${livro.descricao}</p>
         
-        <div class="acoes-livro">
-          <button class="btn-abrir" 
-                  onclick="abrirVisualizacao(event, '${livro.link}')">
+        <div class="botoes-acao">
+          <button class="botao-abrir" 
+                  onclick="abrirVisualizacaoLivro(event, '${livro.link}')">
             📖 Ler Online
           </button>
-          <a href="${window.criarLinkDownload ? window.criarLinkDownload(livro.link) : `https://drive.google.com/uc?export=download&id=${livro.link}`}" 
-             class="btn-download" 
+          <a href="${window.gerarLinkDownload ? window.gerarLinkDownload(livro.link) : `https://drive.google.com/uc?export=download&id=${livro.link}`}" 
+             class="botao-download" 
              target="_blank"
              download="${livro.titulo.replace(/[^a-z0-9]/gi, '_')}.pdf">
             ⬇️ Download
           </a>
           <a href="https://drive.google.com/file/d/${livro.link}/view" 
-             class="btn-drive" 
+             class="botao-drive" 
              target="_blank">
             🔗 Abrir no Drive
           </a>
@@ -159,13 +157,13 @@ class FiltroGenero {
       </div>
     `;
 
-      return livroElemento;
+      return elementoLivro;
    }
 
    atualizarContador(quantidadeFiltrada = null) {
       if (!this.contadorFiltrado || !this.contadorTotal) return;
 
-      const total = this.livros.length;
+      const total = this.listaLivros.length;
       const filtrados = quantidadeFiltrada !== null ? quantidadeFiltrada : total;
 
       this.contadorTotal.textContent = total;
@@ -174,33 +172,33 @@ class FiltroGenero {
 
    atualizarDestaqueGenero() {
       // Remover destaque de todos
-      document.querySelectorAll('.genero-item').forEach(item => {
+      document.querySelectorAll('.item-genero').forEach(item => {
          item.classList.remove('genero-ativo');
       });
 
       // Adicionar destaque ao ativo
       if (this.generoAtivo) {
-         const generoAtivoElement = document.querySelector(`.genero-item[data-genero="${this.generoAtivo}"]`);
-         if (generoAtivoElement) {
-            generoAtivoElement.classList.add('genero-ativo');
+         const elementoGeneroAtivo = document.querySelector(`.item-genero[data-genero="${this.generoAtivo}"]`);
+         if (elementoGeneroAtivo) {
+            elementoGeneroAtivo.classList.add('genero-ativo');
          }
       }
    }
 
    mostrarBotaoLimpar() {
-      if (this.btnLimpar) {
-         this.btnLimpar.style.display = 'inline-block';
+      if (this.botaoLimparFiltros) {
+         this.botaoLimparFiltros.style.display = 'inline-block';
       }
    }
 
    esconderBotaoLimpar() {
-      if (this.btnLimpar) {
-         this.btnLimpar.style.display = 'none';
+      if (this.botaoLimparFiltros) {
+         this.botaoLimparFiltros.style.display = 'none';
       }
    }
 }
 
-// Inicializar quando o DOM estiver pronto
+// Inicializar sistema de filtros quando o DOM estiver pronto
 let filtroGenero;
 
 document.addEventListener('DOMContentLoaded', () => {

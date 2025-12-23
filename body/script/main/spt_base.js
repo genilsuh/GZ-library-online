@@ -1,249 +1,237 @@
+// ==================== CONFIGURAÇÃO DE ÁUDIO ====================
+const logoBiblioteca = document.getElementById("logo");
+const musicaFundo = document.getElementById("musica-fundo");
 
-
-
-const logo = document.getElementById("logo");
-const musica = document.getElementById("musica");
-
-logo.onclick = () => {
-  if (musica.paused) {
-    musica.play();
+logoBiblioteca.onclick = () => {
+  if (musicaFundo.paused) {
+    musicaFundo.play();
   } else {
-    musica.pause();
+    musicaFundo.pause();
   }
 };
 
+// ==================== MODAL DE CADASTRO ====================
+const botaoAbrirModal = document.getElementById('abrir-modal-cadastro');
+const modalCadastro = document.getElementById('modal-cadastro');
+const botaoFecharModal = document.querySelector('.fechar-modal');
+const formularioCadastro = document.getElementById('formulario-cadastro');
 
-
-
-
-
-
-
-
-// MODAL DO CADASTRO
-const btnAbrir = document.getElementById('abriModal');
-const modal = document.getElementById('modalCadastro');
-const btnFechar = document.querySelector('.fecha-cadastro');
-const form = document.getElementById('CartCadastro');
-
-// Eventos para abrir e fechar
-btnAbrir.addEventListener('click', () => {
-  modal.style.display = 'block';
+// Abrir modal de cadastro
+botaoAbrirModal.addEventListener('click', () => {
+  modalCadastro.style.display = 'block';
 });
 
-btnFechar.addEventListener('click', () => {
-  modal.style.display = 'none';
-});
-
-window.addEventListener('click', (event) => {
-  if (event.target === modal) {
-    modal.style.display = 'none';
-  }
-});
-
-// Prevenir envio do formulário (para demonstração)
-if (form) {
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    alert('Cadastro realizado com sucesso! (demonstração)');
-    modal.style.display = 'none';
-    form.reset();
-  });
-}
-
-// --- CARREGAR LISTA DE LIVROS ---
-const listaElemento = document.getElementById('bookList');
-const modalViewer = document.getElementById('viewer');
-const bookFrame = document.getElementById('bookFrame');
-const closeBtn = document.getElementById('closeBtn');
-
-// Função para criar link da imagem
-function criarLinkImagem(id) {
-  if (!id) return 'body/img/capa-padrao.jpg';
-  return `https://drive.google.com/thumbnail?id=${id}&sz=w400`;
-}
-
-// Funções para criar URLs
-function criarLinkVisualizacao(id) {
-  return `https://drive.google.com/file/d/${id}/preview`;
-}
-
-function criarLinkDownload(id) {
-  return `https://drive.google.com/uc?export=download&id=${id}`;
-}
-
-// Abrir visualização do livro
-function abrirVisualizacao(event, livroId) {
-  event.preventDefault();
-  bookFrame.src = criarLinkVisualizacao(livroId);
-  modalViewer.style.display = 'flex';
-  document.body.style.overflow = 'hidden'; // Previne scroll da página principal
-}
-
-// Fechar modal
-closeBtn.addEventListener('click', () => {
-  bookFrame.src = '';
-  modalViewer.style.display = 'none';
-  document.body.style.overflow = 'auto'; // Restaura scroll
+// Fechar modal de cadastro
+botaoFecharModal.addEventListener('click', () => {
+  modalCadastro.style.display = 'none';
 });
 
 // Fechar modal ao clicar fora
-modalViewer.addEventListener('click', (event) => {
-  if (event.target === modalViewer) {
-    bookFrame.src = '';
-    modalViewer.style.display = 'none';
+window.addEventListener('click', (event) => {
+  if (event.target === modalCadastro) {
+    modalCadastro.style.display = 'none';
+  }
+});
+
+// Processar formulário de cadastro
+if (formularioCadastro) {
+  formularioCadastro.addEventListener('submit', (event) => {
+    event.preventDefault();
+    alert('Cadastro realizado com sucesso! (demonstração)');
+    modalCadastro.style.display = 'none';
+    formularioCadastro.reset();
+  });
+}
+
+// ==================== VISUALIZADOR DE LIVROS ====================
+const visualizadorModal = document.getElementById('visualizador');
+const frameLivro = document.getElementById('frame-livro');
+const botaoFecharVisualizador = document.getElementById('fechar-visualizador');
+
+// Funções para gerar URLs do Google Drive
+function gerarLinkImagem(idImagem) {
+  if (!idImagem) return 'body/img/capa-padrao.jpg';
+  return `https://drive.google.com/thumbnail?id=${idImagem}&sz=w400`;
+}
+
+function gerarLinkVisualizacao(idLivro) {
+  return `https://drive.google.com/file/d/${idLivro}/preview`;
+}
+
+function gerarLinkDownload(idLivro) {
+  return `https://drive.google.com/uc?export=download&id=${idLivro}`;
+}
+
+// Abrir visualização do livro
+function abrirVisualizacaoLivro(event, idLivro) {
+  event.preventDefault();
+  frameLivro.src = gerarLinkVisualizacao(idLivro);
+  visualizadorModal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+// Fechar visualizador
+botaoFecharVisualizador.addEventListener('click', () => {
+  frameLivro.src = '';
+  visualizadorModal.style.display = 'none';
+  document.body.style.overflow = 'auto';
+});
+
+// Fechar visualizador ao clicar fora
+visualizadorModal.addEventListener('click', (event) => {
+  if (event.target === visualizadorModal) {
+    frameLivro.src = '';
+    visualizadorModal.style.display = 'none';
     document.body.style.overflow = 'auto';
   }
 });
 
-// Exportar funções para uso global
-window.criarLinkImagem = criarLinkImagem;
-window.criarLinkVisualizacao = criarLinkVisualizacao;
-window.criarLinkDownload = criarLinkDownload;
-window.abrirVisualizacao = abrirVisualizacao;
+// ==================== SISTEMA DE BUSCA ====================
+const campoPesquisa = document.getElementById('campo-pesquisa');
+const botaoPesquisa = document.getElementById('botao-pesquisa');
 
-// Busca de livros
-const barraPesquisa = document.getElementById('pesquisa-header');
-const btnPesquisa = document.getElementById('btn-pesquisa');
-
-function executarBusca() {
-  const termo = barraPesquisa.value.toLowerCase().trim();
-  const livros = document.querySelectorAll('.livro-card');
+function executarBuscaLivros() {
+  const termoBusca = campoPesquisa.value.toLowerCase().trim();
+  const cardsLivros = document.querySelectorAll('.card-livro');
   let livrosEncontrados = 0;
 
-  livros.forEach(livro => {
-    const titulo = livro.querySelector('.titulo')?.textContent.toLowerCase() || '';
-    const autor = livro.querySelector('.autor')?.textContent.toLowerCase() || '';
+  cardsLivros.forEach(card => {
+    const titulo = card.querySelector('.titulo-livro')?.textContent.toLowerCase() || '';
+    const autor = card.querySelector('.autor-livro')?.textContent.toLowerCase() || '';
 
-    if (titulo.includes(termo) || autor.includes(termo)) {
-      livro.style.display = 'block';
+    if (titulo.includes(termoBusca) || autor.includes(termoBusca)) {
+      card.style.display = 'block';
       livrosEncontrados++;
     } else {
-      livro.style.display = 'none';
+      card.style.display = 'none';
     }
   });
 
-  // Atualizar contador
-  if (window.sistemaPaginacao && termo) {
-    const livrosFiltrados = Array.from(livros).filter(livro => livro.style.display !== 'none');
+  // Atualizar contador se houver sistema de paginação
+  if (window.sistemaPaginacao && termoBusca) {
+    const livrosFiltrados = Array.from(cardsLivros).filter(card => card.style.display !== 'none');
     const quantidadeFiltrada = livrosFiltrados.length;
-    const contadorFiltrado = document.getElementById('quantidadeFiltrada');
+    const contadorFiltrado = document.getElementById('quantidade-filtrada');
+
     if (contadorFiltrado) {
       contadorFiltrado.textContent = quantidadeFiltrada;
     }
   }
 }
 
-if (barraPesquisa) {
-  barraPesquisa.addEventListener('input', executarBusca);
+// Event listeners para busca
+if (campoPesquisa) {
+  campoPesquisa.addEventListener('input', executarBuscaLivros);
 }
 
-if (btnPesquisa) {
-  btnPesquisa.addEventListener('click', executarBusca);
+if (botaoPesquisa) {
+  botaoPesquisa.addEventListener('click', executarBuscaLivros);
 }
 
-// --- CARROSSEL ---
+// ==================== CARROSSEL ====================
 document.addEventListener('DOMContentLoaded', () => {
-  const carousel = document.querySelector('.carrossel');
+  const carrossel = document.querySelector('.carrossel-banners');
   const slides = document.querySelectorAll('.slide-banner');
-  const prevBtn = document.querySelector('.ant-btn');
-  const nextBtn = document.querySelector('.prox-btn');
-  const indicators = document.querySelectorAll('.indicador');
+  const botaoAnterior = document.querySelector('.botao-anterior');
+  const botaoProximo = document.querySelector('.botao-proximo');
+  const indicadores = document.querySelectorAll('.indicador');
 
-  if (!carousel || slides.length === 0) return;
+  if (!carrossel || slides.length === 0) return;
 
-  // Configurações
-  let currentSlide = 0;
+  // Configurações do carrossel
+  let slideAtual = 0;
   const totalSlides = slides.length;
-  let slideInterval;
-  const intervalTime = 5000; // 5 segundos
+  let intervaloCarrossel;
+  const tempoIntervalo = 5000; // 5 segundos
 
-  // Função para atualizar o carrossel
-  function updateCarousel() {
-    carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+  // Atualizar posição do carrossel
+  function atualizarCarrossel() {
+    carrossel.style.transform = `translateX(-${slideAtual * 100}%)`;
 
-    // Atualiza indicadores
-    indicators.forEach((indicator, index) => {
-      if (index === currentSlide) {
-        indicator.classList.add('ativo');
+    // Atualizar indicadores
+    indicadores.forEach((indicador, indice) => {
+      if (indice === slideAtual) {
+        indicador.classList.add('ativo');
       } else {
-        indicator.classList.remove('ativo');
+        indicador.classList.remove('ativo');
       }
     });
   }
 
-  // Função para ir para o próximo slide
-  function nextSlide() {
-    currentSlide = (currentSlide + 1) % totalSlides;
-    updateCarousel();
+  // Avançar para próximo slide
+  function proximoSlide() {
+    slideAtual = (slideAtual + 1) % totalSlides;
+    atualizarCarrossel();
   }
 
-  // Função para ir para o slide anterior
-  function prevSlide() {
-    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-    updateCarousel();
+  // Voltar para slide anterior
+  function slideAnterior() {
+    slideAtual = (slideAtual - 1 + totalSlides) % totalSlides;
+    atualizarCarrossel();
   }
 
-  // Função para ir para um slide específico
-  function goToSlide(slideIndex) {
-    currentSlide = slideIndex;
-    updateCarousel();
+  // Ir para slide específico
+  function irParaSlide(indiceSlide) {
+    slideAtual = indiceSlide;
+    atualizarCarrossel();
   }
 
-  // Função para iniciar a transição automática
-  function startAutoSlide() {
-    if (slideInterval) clearInterval(slideInterval);
-    slideInterval = setInterval(nextSlide, intervalTime);
+  // Iniciar transição automática
+  function iniciarCarrosselAutomatico() {
+    if (intervaloCarrossel) clearInterval(intervaloCarrossel);
+    intervaloCarrossel = setInterval(proximoSlide, tempoIntervalo);
   }
 
-  // Função para parar a transição automática
-  function stopAutoSlide() {
-    clearInterval(slideInterval);
+  // Parar transição automática
+  function pararCarrosselAutomatico() {
+    clearInterval(intervaloCarrossel);
   }
 
-  // Função para reiniciar a transição automática
-  function resetAutoSlide() {
-    stopAutoSlide();
-    startAutoSlide();
+  // Reiniciar transição automática
+  function reiniciarCarrosselAutomatico() {
+    pararCarrosselAutomatico();
+    iniciarCarrosselAutomatico();
   }
 
   // Inicializar carrossel
-  function initCarousel() {
-    // Posiciona o carrossel
-    updateCarousel();
+  function inicializarCarrossel() {
+    atualizarCarrossel();
+    iniciarCarrosselAutomatico();
 
-    // Inicia a transição automática
-    startAutoSlide();
-
-    // Adiciona eventos aos botões
-    if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
-        prevSlide();
-        resetAutoSlide();
+    // Eventos dos botões
+    if (botaoAnterior) {
+      botaoAnterior.addEventListener('click', () => {
+        slideAnterior();
+        reiniciarCarrosselAutomatico();
       });
     }
 
-    if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
-        nextSlide();
-        resetAutoSlide();
+    if (botaoProximo) {
+      botaoProximo.addEventListener('click', () => {
+        proximoSlide();
+        reiniciarCarrosselAutomatico();
       });
     }
 
-    // Adiciona eventos aos indicadores
-    indicators.forEach(indicator => {
-      indicator.addEventListener('click', () => {
-        const slideIndex = parseInt(indicator.getAttribute('data-slide'));
-        goToSlide(slideIndex);
-        resetAutoSlide();
+    // Eventos dos indicadores
+    indicadores.forEach(indicador => {
+      indicador.addEventListener('click', () => {
+        const indiceSlide = parseInt(indicador.getAttribute('data-slide'));
+        irParaSlide(indiceSlide);
+        reiniciarCarrosselAutomatico();
       });
     });
 
     // Pausar ao passar o mouse
-    carousel.addEventListener('mouseenter', stopAutoSlide);
-    carousel.addEventListener('mouseleave', startAutoSlide);
+    carrossel.addEventListener('mouseenter', pararCarrosselAutomatico);
+    carrossel.addEventListener('mouseleave', iniciarCarrosselAutomatico);
   }
 
-  // Inicializar
-  initCarousel();
+  inicializarCarrossel();
 });
+
+// ==================== EXPORTAR FUNÇÕES ====================
+window.gerarLinkImagem = gerarLinkImagem;
+window.gerarLinkVisualizacao = gerarLinkVisualizacao;
+window.gerarLinkDownload = gerarLinkDownload;
+window.abrirVisualizacaoLivro = abrirVisualizacaoLivro;

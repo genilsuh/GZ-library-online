@@ -4,145 +4,137 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GZ Library</title>
+  <title>GZ Library - Biblioteca Digital</title>
   <link rel="stylesheet" href="body/style/pg_inicio.css">
-  <!-- Adicionando Font Awesome para os ícones -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
 
-  <!-- HEADER // PARTE DE CIMA -->
+  <!-- CABEÇALHO -->
   <header>
-    <nav class="nav-bar">
-
-      <div class="logo">
-        <img id="logo" class="logo" src="body/img/icons/looogo.png" alt="logo-jpeg">
-
-        <audio id="musica" controls loop style="display: none;">
+    <nav class="barra-navegacao">
+      <div class="logo-container">
+        <img id="logo" class="logo-imagem" src="body/img/icons/looogo.png" alt="Logo da GZ Library">
+        <audio id="musica-fundo" controls loop style="display: none;">
           <source src="body/audio/FSO 2016 Oficial _ Harry Potter and the Philosopher_s Stone(MP3_160K) (2).mp3"
             type="audio/mpeg">
         </audio>
       </div>
 
-      <div class="bar-pesquisa">
-        <input type="text" placeholder="Buscar livro..." id="pesquisa-header">
-        <button type="button" id="btn-pesquisa">🔍</button>
+      <div class="barra-pesquisa-container">
+        <input type="text" placeholder="Buscar livro..." id="campo-pesquisa">
+        <button type="button" id="botao-pesquisa">🔍</button>
       </div>
 
-      <div class="bt-acess">
-        <button id="abriModal" class="btn-abri-modal">Cadastre-se</button>
+      <div class="botoes-acesso">
+        <button id="abrir-modal-cadastro" class="botao-cadastro">Cadastre-se</button>
       </div>
-
     </nav>
   </header>
 
   <!-- MODAL DE CADASTRO -->
-  <div id="modalCadastro" class="modal-cadastro" style="display: none;">
-    <div class="modal-conteudo">
-
-      <!-- CABEÇALHO -->
-      <div class="header-do-modal-cadastro">
+  <div id="modal-cadastro" class="modal-cadastro" style="display: none;">
+    <div class="conteudo-modal">
+      <div class="cabecalho-modal">
         <h2>Cadastro</h2>
-        <button class="fecha-cadastro">&times;</button>
+        <button class="fechar-modal">&times;</button>
       </div>
 
-      <!-- corpo -->
-      <div class="modal-corpo">
-        <form id="CartCadastro">
-          <div class="item-form">
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required>
+      <div class="corpo-modal">
+        <form id="formulario-cadastro">
+          <div class="item-formulario">
+            <label for="nome-usuario">Nome:</label>
+            <input type="text" id="nome-usuario" name="nome" required>
           </div>
 
-          <div class="item-form">
-            <label for="email">E-mail:</label>
-            <input type="email" id="email" name="email" required>
+          <div class="item-formulario">
+            <label for="email-usuario">E-mail:</label>
+            <input type="email" id="email-usuario" name="email" required>
           </div>
 
-          <div class="item-form">
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" required>
+          <div class="item-formulario">
+            <label for="senha-usuario">Senha:</label>
+            <input type="password" id="senha-usuario" name="senha" required>
           </div>
-          <button type="submit" class="btn-enviar">Cadastrar</button>
+
+          <button type="submit" class="botao-enviar">Cadastrar</button>
         </form>
       </div>
-
     </div>
   </div>
 
-  <!-- CARROSSEL -->
-  <div class="container-banner">
-    <div class="carrossel">
+  <!-- CARROSSEL DE BANNERS -->
+  <div class="container-carrossel">
+    <div class="carrossel-banners">
       <div class="slide-banner">
-        <img src="body/img/slide-banner/GZ.png" alt="Banner 1">
+        <img src="body/img/slide-banner/GZ.png" alt="Banner 1 - GZ Library">
       </div>
       <div class="slide-banner">
-        <img src="body/img/slide-banner/GZ2.png" alt="Banner 2">
+        <img src="body/img/slide-banner/GZ2.png" alt="Banner 2 - GZ Library">
       </div>
     </div>
 
-    <!-- BOTAO E INDICADOR -->
-    <button class="slide-btn ant-btn">
+    <button class="botao-slide botao-anterior">
       <i class="fas fa-chevron-left"></i>
     </button>
-    <button class="slide-btn prox-btn">
+    <button class="botao-slide botao-proximo">
       <i class="fas fa-chevron-right"></i>
     </button>
 
-    <div class="carousel-indicators">
+    <div class="indicadores-carrossel">
       <div class="indicador ativo" data-slide="0"></div>
       <div class="indicador" data-slide="1"></div>
     </div>
   </div>
 
-  <!-- DESTAQUES // FILTRO DE GENERO -->
-  <section class="destaques">
+  <!-- SEÇÃO DE GÊNEROS -->
+  <section class="secao-generos">
     <h2>Gêneros Populares</h2>
-    <div class="generos">
-      <div class="genero-item" data-genero="aventura">
+    <div class="lista-generos">
+      <div class="item-genero" data-genero="aventura">
         <a href="#aventura" aria-label="Livros de Aventura">
           <img src="body/img/generos/aventuramg.jpeg" alt="Ícone de Aventura">
         </a>
         <h4>Aventura</h4>
       </div>
 
-      <div class="genero-item" data-genero="fantasia">
+      <div class="item-genero" data-genero="fantasia">
         <a href="#fantasia" aria-label="Livros de Fantasia">
           <img src="body/img/generos/fantasiamg.jpeg" alt="Ícone de Fantasia">
         </a>
         <h4>Fantasia</h4>
       </div>
 
-      <div class="genero-item" data-genero="filosofia">
+      <div class="item-genero" data-genero="filosofia">
         <a href="#filosofia" aria-label="Livros de Filosofia">
           <img src="body/img/generos/filosofiamg.jpeg" alt="Ícone de Filosofia">
         </a>
         <h4>Filosofia</h4>
       </div>
 
-      <div class="genero-item" data-genero="poesia">
+      <div class="item-genero" data-genero="poesia">
         <a href="#poesia" aria-label="Livros de Poesia">
           <img src="body/img/generos/poesiamg.jpeg" alt="Ícone de Poesia">
         </a>
         <h4>Poesia</h4>
       </div>
 
-      <div class="genero-item" data-genero="terror">
+      <div class="item-genero" data-genero="terror">
         <a href="#terror" aria-label="Livros de Terror">
           <img src="body/img/generos/terrormg.jpeg" alt="Ícone de Terror">
         </a>
         <h4>Terror</h4>
       </div>
 
-      <div class="genero-item" data-genero="romance">
+      <div class="item-genero" data-genero="romance">
         <a href="#romance" aria-label="Livros de Romance">
           <img src="body/img/generos/romancemg.png" alt="Ícone de Romance">
         </a>
         <h4>Romance</h4>
       </div>
 
-      <div class="genero-item" data-genero="suspense">
+      <div class="item-genero" data-genero="suspense">
         <a href="#suspense" aria-label="Livros de Suspense">
           <img src="body/img/generos/suspensemg.png" alt="Ícone de Suspense">
         </a>
@@ -150,49 +142,58 @@
       </div>
     </div>
 
-    <button id="limparFiltros" class="btn-limpar" style="display: none;">
+    <button id="limpar-filtros" class="botao-limpar-filtros" style="display: none;">
       Limpar Filtros (Mostrar Todos)
     </button>
   </section>
 
-  <!-- CORPO PRINCIPAL -->
+  <!-- CONTEÚDO PRINCIPAL -->
   <main>
     <h1>~ Biblioteca Digital ~</h1>
-    <div id="contadorLivros" class="contador-livros">
-      Mostrando <span id="quantidadeFiltrada">0</span> de <span id="quantidadeTotal">0</span> Livros
+    <div id="contador-livros" class="contador-livros">
+      Mostrando <span id="quantidade-filtrada">0</span> de <span id="quantidade-total">0</span> Livros
     </div>
-    <div id="bookList" class="book-list"></div>
+    <div id="lista-livros" class="lista-livros"></div>
 
-    <!-- PAGINAÇÃO -->
-    <div id="paginacaoContainer" class="paginacao-container" style="display: none;">
-      <button id="paginaAnterior" class="btn-pagina" disabled>← Anterior</button>
-      <div id="numerosPagina" class="numeros-pagina"></div>
-      <button id="proximaPagina" class="btn-pagina">Próxima →</button>
+    <!-- CONTROLES DE PAGINAÇÃO -->
+    <div id="container-paginacao" class="container-paginacao" style="display: none;">
+      <button id="pagina-anterior" class="botao-pagina" disabled>← Anterior</button>
+      <div id="numeros-pagina" class="numeros-pagina"></div>
+      <button id="proxima-pagina" class="botao-pagina">Próxima →</button>
     </div>
   </main>
 
-  <!-- MODAL VISUALIZADOR -->
-  <div id="viewer" class="viewer-modal" style="display: none;">
-    <div class="modal-content">
-      <button id="closeBtn" class="close-btn">✕ FECHAR</button>
-      <iframe id="bookFrame" src="" title="Visualizador de Livro"></iframe>
+  <!-- MODAL DO VISUALIZADOR DE LIVROS -->
+  <div id="visualizador" class="modal-visualizador" style="display: none;">
+    <div class="conteudo-visualizador">
+      <button id="fechar-visualizador" class="botao-fechar">✕ FECHAR</button>
+      <iframe id="frame-livro" src="" title="Visualizador de Livro"></iframe>
     </div>
   </div>
 
   <!-- RODAPÉ -->
-  <div class="rodape">
-    <footer>
-      <div class="contt">
-        <h3>Contato</h3>
-        <ul>
-          <li>E-mail: <a class="link-ctt" href="mailto:contato@gzlibrary.com">contato@gzlibrary.com</a></li>
-          <li>Instagram: <a class="link-ctt" href="https://instagram.com/genilsuh" target="_blank">@genilsuh</a></li>
-        </ul>
-      </div>
-      <p>© GZ Library - 2025</p>
-    </footer>
-  </div>
+  <footer class="rodape">
+    <div class="contato-container">
+      <h3>Contato</h3>
+      <ul>
+        <li>
+          E-mail: XXXXXXX@XXX.XXX
+        </li>
+        <li>
+          Instagram: @XXXXXXXXXXX
+        </li>
+        <li>
+          to sem ideia
+        </li>
+        <li>
+          estoy sem idea
+        </li>
+      </ul>
+    </div>
+    <p>© GZ Library - 2025</p>
+  </footer>
 
+  <!-- SCRIPTS -->
   <script src="body/script/db/data_book.js"></script>
   <script src="body/script/main/spt_base.js"></script>
   <script src="body/script/main/filtro.js"></script>
